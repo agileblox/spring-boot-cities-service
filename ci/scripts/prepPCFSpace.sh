@@ -29,17 +29,15 @@ main()
   fi
 
   create_service p-service-registry standard $EUREKA_SERVICE_NAME
-  if [ $service_created -eq 1 ]
+  STATUS=`cf service ServiceReg | grep Status`
+  while [ $STATUS == *"progress"* ]
+  do
+    STATUS=`cf service $EUREKA_SERVICE_NAME | grep Status`
+  done
+  if [ $STATUS == *"failed"* ]
   then
-    # Sleep for service registry
-    max=12
-    number=0
-    while [ "$number" -lt $max ]
-    do
-      echo "Pausing to allow Service Discovery to Initialise.....$number/$max"
-      number=`expr $number + 1 `
-      sleep 5
-    done
+    echo_msg "Could not create Service Discovery service"
+    exit 1
   fi
   summaryOfServices
   cf logout
