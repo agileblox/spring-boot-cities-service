@@ -29,6 +29,7 @@ main()
   EXISTS=`cf services | grep ${EUREKA_SERVICE_NAME} | wc -l | xargs`
   if [ $EXISTS -eq 0 ]
   then
+    echo "Creating"
     create_service p-service-registry standard $EUREKA_SERVICE_NAME
     STATUS=`cf service $EUREKA_SERVICE_NAME | grep Status`
     PROGRESS=`echo $STATUS | grep progress | wc -l | xargs`
