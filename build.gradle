@@ -7,6 +7,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE")
     }
 }
 
@@ -20,10 +21,10 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.SR1"
-        mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:1.1.1.RELEASE"
-    }
+  imports {
+    mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Brixton.SR5'
+    mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:1.1.1.RELEASE"
+  }
 }
 
 jar {
@@ -43,7 +44,6 @@ allprojects {
 		project.version = '1.0'
 	} 
 }
-
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
@@ -70,6 +70,5 @@ task wrapper(type: Wrapper) {
 test {
     testLogging {
         events "passed", "skipped", "failed", "standardError"
-        //events "passed", "skipped", "failed", "standardOut", "standardError"
     }
 }
