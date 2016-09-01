@@ -42,7 +42,7 @@ main()
     done
 
     #Did it fail?
-    PROGRESS=`grep failed $STATUS | wc -l | xargs`
+    PROGRESS=`echo $STATUS | grep failed | wc -l | xargs`
     if [ $PROGRESS -eq 1 ]
     then
       echo_msg "Could not create Service Discovery service"
