@@ -4,12 +4,10 @@ set -e
 
 create_service()
 {
-  service_created=0
   EXISTS=`cf services | grep ${1} | wc -l | xargs`
   if [ $EXISTS -eq 0 ]
   then
     cf create-service ${1} ${2} ${3}
-    service_created=1
   fi
 }
 
