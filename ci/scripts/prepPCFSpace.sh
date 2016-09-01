@@ -28,16 +28,22 @@ main()
     cf create-service p-mysql $PLAN ${DB_SERVICE_NAME}
   fi
 
-  create_service p-service-registry standard $EUREKA_SERVICE_NAME
-  STATUS=`cf service ServiceReg | grep Status`
-  while [ $STATUS == *"progress"* ]
-  do
-    STATUS=`cf service $EUREKA_SERVICE_NAME | grep Status`
-  done
-  if [ $STATUS == *"failed"* ]
+  EXISTS=`cf services | grep ${EUREKA_SERVICE_NAME} | wc -l | xargs`
+  if [ $EXISTS -eq 0 ]
   then
-    echo_msg "Could not create Service Discovery service"
-    exit 1
+    create_service p-service-registry standard $EUREKA_SERVICE_NAME
+    STATUS=`cf service $EUREKA_SERVICE_NAME | grep Status`
+    while [[ $STATUS == *"progress"* ]]
+    do
+      STATUS=`cf service $EUREKA_SERVICE_NAME | grep Status`
+      echo $EUREKA_SERVICE_NAME ":" $STATUS
+      sleep 2.5
+    done
+    if [[ $STATUS == *"failed"* ]]
+    then
+      echo_msg "Could not create Service Discovery service"
+      exit 1
+    fi
   fi
   summaryOfServices
   cf logout
