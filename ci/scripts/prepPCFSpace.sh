@@ -31,13 +31,13 @@ main()
   then
     create_service p-service-registry standard $EUREKA_SERVICE_NAME
     STATUS=`cf service $EUREKA_SERVICE_NAME | grep Status`
-    PROGRESS=`grep progress $STATUS | wc -l | xargs`
+    PROGRESS=`echo $STATUS | grep progress | wc -l | xargs`
     while [ $PROGRESS -eq 1 ]
     do
       echo $EUREKA_SERVICE_NAME ":" $STATUS
       sleep 2.5
       STATUS=`cf service $EUREKA_SERVICE_NAME | grep Status`
-      PROGRESS=`grep progress $STATUS | wc -l | xargs`
+      PROGRESS=`echo $STATUS | grep progress | wc -l | xargs`
     done
 
     #Did it fail?
