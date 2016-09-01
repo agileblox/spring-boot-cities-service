@@ -31,13 +31,18 @@ main()
   then
     create_service p-service-registry standard $EUREKA_SERVICE_NAME
     STATUS=`cf service $EUREKA_SERVICE_NAME | grep Status`
-    while [[ $STATUS == *"progress"* ]]
+    PROGRESS=`grep progress $STATUS | wc -l | xargs`
+    while [ $PROGRESS -eq 1 ]
     do
-      STATUS=`cf service $EUREKA_SERVICE_NAME | grep Status`
       echo $EUREKA_SERVICE_NAME ":" $STATUS
       sleep 2.5
+      STATUS=`cf service $EUREKA_SERVICE_NAME | grep Status`
+      PROGRESS=`grep progress $STATUS | wc -l | xargs`
     done
-    if [[ $STATUS == *"failed"* ]]
+
+    #Did it fail?
+    PROGRESS=`grep failed $STATUS | wc -l | xargs`
+    if [ $PROGRESS -eq 1 ]
     then
       echo_msg "Could not create Service Discovery service"
       exit 1
