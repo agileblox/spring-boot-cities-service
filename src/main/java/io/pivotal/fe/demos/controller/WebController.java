@@ -21,4 +21,10 @@ public class WebController {
 	public Iterable<City> showAllCities() {
 		return repo.findAll();
 	}
+	
+	@RequestMapping("/killme")
+	public void die() {
+		System.out.println("Killing instance!");;
+		System.exit(1);
+	}
 }
