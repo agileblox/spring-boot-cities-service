@@ -28,7 +28,7 @@ Because Spring Boot is opinionated, it automatically connects this app to the co
 
 If you've never heard of Cloud Foundry - use it! This app is very simple to construct, as soon as you deploy it to Cloud Foundry your entire support infrastructure, app server, libraries etc are configured loaded and deployed within 2 minutes - push this application to our trial instance of cloud foundry at run.pivotal.io. This si classic DevOps separation of concerns yet both in harmony together.
 
-###Usage!
+## Usage!
 When you run this app locally or on CF you can access its features using several RESTful endpoints. Note - this is only a SMALL sample of the endpoints available, this app exposes HATEOS endpoints. e.g. when running locally:
 * <a href="http://localhost:8080/cities" target="_blank">http://localhost:8080/cities</a> - returns a single page JSON listing cities (20 cities in a page)
 * <a href="http://localhost:8080/cities?page=2&size=5" target="_blank">http://localhost:8080/cities?page=2&size=5</a> - returns only FIVE results from the SECOND page
@@ -36,21 +36,21 @@ When you run this app locally or on CF you can access its features using several
 * <a href="http://localhost:8080/cities/search/nameContains?q=Lon&size=3" target="_blank">http://localhost:8080/cities/search/nameContains?q=Lon&size=3</a> - returns the first three results of the search to find any cities with a name containing the word "Lon" (case insensitive search)
 * <a href="http://localhost:8080/health" target="_blank">http://localhost:8080/health</a> - This returns the current health of the app, it is provided by Spring Boot Actuator. This and all other actuator endpoints that actuator provides are available immediately.
 
-###Wait, I want a GUI!
+## Wait, I want a GUI!
 There is a separate application which can be used as a GUI to consume the data delivered by this Microservice here: https://github.com/skazi-pivotal/spring-boot-cities-ui or feel free to write your own, using that as a guide.
 
 ![Cities](/docs/Cities-ui.png)
 
-###What about Netflix OSS and Spring Cloud Services?
+## What about Netflix OSS and Spring Cloud Services?
 Netflix OSS is a great way of managing distributed Microservices. There is another branch of this project which takes advantgaes of Spring Cloud Services in Pivotal Cloud Foundry, therfore automatically including several Netflix OSS features. To see this switch to the SCS branch.
 
-###Can I get some metrics?
+## Can I get some metrics?
 Spring Boot Actuator automatically exposes endpoints which allow you to consume useful information such as health, configprops, for more info check this out: http://docs.spring.io/autorepo/docs/spring-boot/1.2.0.M2/reference/htmlsingle/#production-ready
 
-###This app is too simple
+## This app is too simple
 Yes it is, but ok then if you want a more advanced Microservice based application you should really check out this Repo: https://github.com/pivotal-bank/cf-SpringBootTrader. This is several microservices tied together using some great Netflix OSS features delivered via Spring and Cloud Foundry.
 
-###How is data loaded?
+## How is data loaded?
 With Spring and Spring Boot there are several ways to get an applicaton to initialise and load data automatically into a database on startup. This application uses flyway, but can also use Hibernate instead. For more info check out this page: https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html
 
 This application will use Flyway by default to load data into the database. To do this I simply added the flyway maven repo dependency in my build.gradle and Spring Boot takes care of the rest by automatically binding the right datasource and loading it on class initialisation. Using flyway (or hibernate) eliminates any ugly initialisation java code which needs to be maintained and hidden away in your application.
@@ -67,7 +67,7 @@ spring.jpa.hibernate.naming-strategy = org.hibernate.cfg.ImprovedNamingStrategy
 spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5Dialect
 ```
 
-###Achitecture
+## Achitecture
 ![Cities](/docs/Classes.png)
 
 This app is very simple, it is ultimately driven by three classes and some properties and that is it.
@@ -77,7 +77,7 @@ This app is very simple, it is ultimately driven by three classes and some prope
 * WebController.java (optional) - This class isn't necessary, however it exposes a new REST endpoint 'cities_all' which lists all cities with no paging or size control options
 * DataSourceConfig.java (optional) - This class isn't necessary, however it allows you to run this application locally on your Mac, desktop etc - it will bound your app to a local MySQL Server. You can use hibernate very easily instead, see the original project this is forked from.
 
-###Tell me more
+## Tell me more
 Spring Boot is designed to get you up and running quickly and it is opinionated, so:
 
 * I have not needed to define a long list of libraries, in my build.gradle I add a dependency on Spring Boot and then dependencies on specific spring-boot starter projects. Spring Boot does the rest, it makes opinions for you
