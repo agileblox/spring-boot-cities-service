@@ -72,5 +72,5 @@ public class TestRestAPICityRepository {
 		@SuppressWarnings("unchecked")
 		LinkedHashMap<String, Integer> page = (LinkedHashMap<String, Integer>) respEntity.get("page");
 		return page.get("totalElements").intValue();
-	}
+	} 
 }

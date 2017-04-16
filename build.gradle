@@ -14,16 +14,17 @@ plugins {
     id "io.spring.dependency-management" version "0.6.0.RELEASE"
 }
 
-apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
+apply plugin: 'war'
 
-jar {
+war {
     baseName = 'cities-service'
 }
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 
@@ -44,9 +45,10 @@ dependencies {
 	compile 'org.springframework.cloud:spring-cloud-spring-service-connector'
 	compile 'org.springframework.cloud:spring-cloud-cloudfoundry-connector'
 	//runtime("org.hsqldb:hsqldb")
-	runtime('com.h2database:h2')
-	//runtime("mysql:mysql-connector-java")
+	//runtime('com.h2database:h2')
+	runtime("mysql:mysql-connector-java")
 	runtime("org.flywaydb:flyway-core")
+        providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
     testCompile('org.springframework.boot:spring-boot-starter-test') 
 }
 
