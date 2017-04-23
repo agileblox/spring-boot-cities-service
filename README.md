@@ -4,7 +4,7 @@ https://twitter.com/Sufyaan_Kazi
   * [Running the app locally](#running-the-app-locally)
   * [Running the app on Cloud Foundry](#running-the-app-on-cloud-foundry)
   * [Running the app directly on AWS](#running-the-app-directly-on-aws)
-  * [Usage!](#usage-)
+  * [Usage!](#usage!)
   * [Wait, I want a GUI!](#wait--i-want-a-gui-)
   * [What about Netflix OSS and Spring Cloud Services?](#what-about-netflix-oss-and-spring-cloud-services-)
   * [Can I get some metrics?](#can-i-get-some-metrics-)
