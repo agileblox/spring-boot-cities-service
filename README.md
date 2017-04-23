@@ -28,6 +28,15 @@ Because Spring Boot is opinionated, it automatically connects this app to the co
 
 If you've never heard of Cloud Foundry - use it! This app is very simple to construct, as soon as you deploy it to Cloud Foundry your entire support infrastructure, app server, libraries etc are configured loaded and deployed within 2 minutes - push this application to our trial instance of cloud foundry at run.pivotal.io. This si classic DevOps separation of concerns yet both in harmony together.
 
+## Running the app directly on AWS
+Running the app on AWS using Elastic Beanstalk is a bit more involved. To simplify things I created banches of this project called elbeanstalk. Fundamentally to get this to work you need to overcome the problem that NGinX always assumes the tomcat server is running on port 5000. You can overcome this by directly changing the port in the application props file of the app, but then you would need to use spring boot params/profiles to manage properties for running on your local machine vs AWS. You could then use some form of config service to help. An alternate method is to use ELB software config in your app environment to inject the ports into the AWS environment. More info can be found here:
+https://aws.amazon.com/blogs/devops/deploying-a-spring-boot-application-on-aws-using-aws-elastic-beanstalk/
+In addition, use the env params to inject the credentials for your RDS instance (or a.n.other) to alow this app to talk to a database.
+
+Either way, building the right cd pipeline should overcome these issues. This project was originally written with concourse in mind, but the pipelines for this haven't been updated to work with AWS. If using AWs, you may consider using these: https://aws.amazon.com/products/developer-tools/
+
+Finaly, one other option is to just create EC2 instances in your VPc, and deploy this app as a war directly to your own tomcat. Creating a war rather than jar is easy (butan odd thing to do ...), as Josh Long would say .. make jar not war. Anyway, if you really want to, have a look at what's necessay, look at the build.gradle in the AppD branch of this project.
+
 ## Usage!
 When you run this app locally or on CF you can access its features using several RESTful endpoints. Note - this is only a SMALL sample of the endpoints available, this app exposes HATEOS endpoints. e.g. when running locally:
 * <a href="http://localhost:8080/cities" target="_blank">http://localhost:8080/cities</a> - returns a single page JSON listing cities (20 cities in a page)
