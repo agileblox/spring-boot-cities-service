@@ -32,7 +32,7 @@ If you've never heard of Cloud Foundry - use it! This app is very simple to cons
 Running the app on AWS using Elastic Beanstalk is a bit more involved. To simplify things I created banches of this project called elbeanstalk. Fundamentally to get this to work you need to overcome the problem that NGinX always assumes the tomcat server is running on port 5000. You can overcome this by directly changing the port in the application props file of the app, but then you would need to use spring boot params/profiles to manage properties for running on your local machine vs AWS. You could then use some form of config service to help. An alternate method is to use ELB software config in your app environment to inject the ports into the AWS environment. More info can be found here:
 https://aws.amazon.com/blogs/devops/deploying-a-spring-boot-application-on-aws-using-aws-elastic-beanstalk/
 
-In addition, use the env params to inject the credentials for your RDS instance (or a.n.other) to alow this app to talk to a database.
+In addition, use the env params to inject the credentials for your RDS instance (or a.n.other) to allow this app to talk to a database.
 
 Either way, building the right cd pipeline should overcome these issues. This project was originally written with concourse in mind, but the pipelines for this haven't been updated to work with AWS. If using AWs, you may consider using these: https://aws.amazon.com/products/developer-tools/
 
