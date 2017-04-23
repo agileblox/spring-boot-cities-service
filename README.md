@@ -71,7 +71,7 @@ Flyyway is pretty simple, it looks for sql files in the resources sub-folder, an
 
 e.g. file V1.sql will run before V1.1. If you later add V1.2, only this file will be executed.
 
-By default, only cities from Hampshire, Surrey and the West Midlands are loaded (for performance reasons) in this app. To load all cities, renmae the db/migrations/....txt file and delete your local copy of the three sql files for these counties.
+By default, only cities from Hampshire, Surrey and the West Midlands are loaded (for performance reasons) in this app. To load all cities, rename the db/migrations/....txt file and delete your local copy of the three sql files for these counties.
 
 If you don't want to use Flyway and use hibernate instead, simply comment it out from the dependencies section in the buld.gradle (and Spring Boot will not activate it). You can then simple uncomment the following lines in [src/main/resources/application.properties] (src/main/resources/application.properties) file:
 
