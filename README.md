@@ -5,7 +5,7 @@ https://twitter.com/Sufyaan_Kazi
   * [Running the app on Cloud Foundry](#running-the-app-on-cloud-foundry)
   * [Running the app directly on AWS](#running-the-app-directly-on-aws)
   * [Usage!](#usage)
-  * [Wait, I want a GUI!](#wait--i-want-a-gui)
+  * [Wait, I want a GUI!](#wait-i-want-a-gui)
   * [What about Netflix OSS and Spring Cloud Services?](#what-about-netflix-oss-and-spring-cloud-services)
   * [Can I get some metrics?](#can-i-get-some-metrics)
   * [This app is too simple](#this-app-is-too-simple)
