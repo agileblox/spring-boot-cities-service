@@ -8,7 +8,7 @@ This is a very simple Spring Boot project which demonstrates, that with only sma
 Note: This is a FORK of https://github.com/cf-platform-eng/spring-boot-cities! Thanks to help and tips from my team, as well as Dave Syer and Scott Frederick in this and other branches :) The SCS branch includes updates to work with Spring Cloud Services.
 
 ## Running the app locally
-You don't need to have a database running, this app will automatically spin up H2 in memory for you, because of Spring Boot. However, if you have one you want to use, such as MySQL, then a) comment/uncomment the relevant lines in build.gradle to get Spring Boot to automatically load the mySQL jdbc drives and b) amend the application.yml file with url, username etc settings for your database. 
+You don't need to have a database running, this app will automatically spin up H2 in memory for you, because of Spring Boot. However, if you have one you want to use, such as MySQL, then a) comment/uncomment the relevant lines in build.gradle to get Spring Boot to automatically load the mySQL jdbc drivers and b) amend the application.yml file with url, username etc settings for your database. 
 
 To run outside of Eclipse just run 
 ```./gradlew bootRun ```
@@ -36,12 +36,12 @@ https://aws.amazon.com/blogs/devops/deploying-a-spring-boot-application-on-aws-u
 
 In addition, use the env params to inject the credentials for your RDS instance (or a.n.other) to allow this app to talk to a database.
 
-Either way, building the right cd pipeline should overcome these issues. This project was originally written with concourse in mind, but the pipelines for this haven't been updated to work with AWS. If using AWs, you may consider using these: https://aws.amazon.com/products/developer-tools/
+Either way, building the right cd pipeline should overcome these issues. This project was originally written with concourse in mind, but the pipelines for this haven't been updated to work with AWS. If using AWS, you may consider using these: https://aws.amazon.com/products/developer-tools/
 
-Finaly, one other option is to just create EC2 instances in your VPc, and deploy this app as a war directly to your own tomcat. Creating a war rather than jar is easy (butan odd thing to do ...), as Josh Long would say .. make jar not war. Anyway, if you really want to, have a look at what's necessay, look at the build.gradle in the AppD branch of this project.
+Finaly, one other option is to just create EC2 instances in your VPC and deploy this app as a war directly to your own tomcat. Creating a war rather than jar is easy (but an odd thing to do ... as Josh Long would say .. make jar not war). Anyway, if you really want to, have a look at what's necessary, look at the build.gradle in the AppD branch of this project.
 
 ## Usage!
-When you run this app locally or on CF you can access its features using several RESTful endpoints. Note - this is only a SMALL sample of the endpoints available, this app exposes HATEOS endpoints. e.g. when running locally:
+When you run this app you can access its features using several RESTful endpoints. Note - this is only a SMALL sample of the endpoints available, this app exposes HATEOS endpoints. e.g. when running locally:
 * <a href="http://localhost:8080/cities" target="_blank">http://localhost:8080/cities</a> - returns a single page JSON listing cities (20 cities in a page)
 * <a href="http://localhost:8080/cities?page=2&size=5" target="_blank">http://localhost:8080/cities?page=2&size=5</a> - returns only FIVE results from the SECOND page
 * <a href="http://localhost:8080/cities/search/name?q=London" target="_blank">http://localhost:8080/cities/search/name?q=London</a> - returns a list of cities with London in their name.
@@ -57,7 +57,7 @@ There is a separate application which can be used as a GUI to consume the data d
 Netflix OSS is a great way of managing distributed Microservices. There is another branch of this project which takes advantgaes of Spring Cloud Services in Pivotal Cloud Foundry, therfore automatically including several Netflix OSS features. To see this switch to the SCS branch.
 
 ## Can I get some metrics?
-Spring Boot Actuator automatically exposes endpoints which allow you to consume useful information such as health, configprops, for more info check this out: http://docs.spring.io/autorepo/docs/spring-boot/1.2.0.M2/reference/htmlsingle/#production-ready. Alternately if you want to use AppDynamics, check out the appD branch where I package the app as a war to deploy to tomcat (which you can instrument wth App dynamics). AppD will then automatically identify and discover the application endpoints.
+Spring Boot Actuator automatically exposes endpoints which allow you to consume useful information such as health, configprops, for more info check this out: http://docs.spring.io/autorepo/docs/spring-boot/1.2.0.M2/reference/htmlsingle/#production-ready. Alternately if you want to use AppDynamics, check out the AppD branch where I package the app as a war to deploy to tomcat (which you can instrument wth AppDynamics). AppD will then automatically identify and discover the application architecture.
 
 ## This app is too simple
 Yes it is, but ok then if you want a more advanced Microservice based application you should really check out this Repo: https://github.com/pivotal-bank/cf-SpringBootTrader. This is several microservices tied together using some great Netflix OSS features delivered via Spring and Cloud Foundry to create a stock trading app.
