@@ -1,3 +1,5 @@
+https://twitter.com/Sufyaan_Kazi
+
 # spring-boot-cities-service
 This is a very simple Spring Boot project which demonstrates, that with only small a footprint of code its possible to a create a complex webservice which exposes CRUD operations as restful endpoints. This microservice runs on a local machine or on Cloud Foundry, or AWS (or anywhere you can run a Spring Boot app). To see how to package a war rather than a "fat" jar, look in the AppD branch.
 
@@ -55,21 +57,23 @@ There is a separate application which can be used as a GUI to consume the data d
 Netflix OSS is a great way of managing distributed Microservices. There is another branch of this project which takes advantgaes of Spring Cloud Services in Pivotal Cloud Foundry, therfore automatically including several Netflix OSS features. To see this switch to the SCS branch.
 
 ## Can I get some metrics?
-Spring Boot Actuator automatically exposes endpoints which allow you to consume useful information such as health, configprops, for more info check this out: http://docs.spring.io/autorepo/docs/spring-boot/1.2.0.M2/reference/htmlsingle/#production-ready
+Spring Boot Actuator automatically exposes endpoints which allow you to consume useful information such as health, configprops, for more info check this out: http://docs.spring.io/autorepo/docs/spring-boot/1.2.0.M2/reference/htmlsingle/#production-ready. Alternately if you want to use AppDynamics, check out the appD branch where I package the app as a war to deploy to tomcat (which you can instrument wth App dynamics). AppD will then automatically identify and discover the application endpoints.
 
 ## This app is too simple
-Yes it is, but ok then if you want a more advanced Microservice based application you should really check out this Repo: https://github.com/pivotal-bank/cf-SpringBootTrader. This is several microservices tied together using some great Netflix OSS features delivered via Spring and Cloud Foundry.
+Yes it is, but ok then if you want a more advanced Microservice based application you should really check out this Repo: https://github.com/pivotal-bank/cf-SpringBootTrader. This is several microservices tied together using some great Netflix OSS features delivered via Spring and Cloud Foundry to create a stock trading app.
 
 ## How is data loaded?
 With Spring and Spring Boot there are several ways to get an applicaton to initialise and load data automatically into a database on startup. This application uses flyway, but can also use Hibernate instead. For more info check out this page: https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html
 
-This application will use Flyway by default to load data into the database. To do this I simply added the flyway maven repo dependency in my build.gradle and Spring Boot takes care of the rest by automatically binding the right datasource and loading it on class initialisation. Using flyway (or hibernate) eliminates any ugly initialisation java code which needs to be maintained and hidden away in your application.
+This application will use Flyway by default to load data into the database. To do this I simply added the flyway maven repo dependency in my build.gradle and Spring Boot makes sure flyway is loaded and launched for me.  Using flyway (or hibernate) eliminates any ugly initialisation java code within my app that needs to be maintained. 
 
-Flyway expects the database to be empty (but you can add a property to override this). Flyway will create an additional table in your database which it uses to keep track of which database "migrations" it has performed, so on start up it will see the empty db and "migrate" from scratch. In the future if you want to add more data, change db structure, you just encode these as db migration too and flyway will only aply these new commands. Flyway migrations are simply .sql files, you can write flavours of different sql for different vendors if you need to. Spring Boot will automatically look for these sql files in your apps the [src/main/resources/db/migration] (src/main/resources/) folder, and instruct flyway automatically. The names of the .sql files allows flyway to run these SQL commands in the correct order and also for it to keep track of what commands it has already run, e.g. file V1.sql will run before V1.1. If you later add V1.2, only this file will be executed.
+Flyyway is pretty simple, it looks for sql files in the resources sub-folder, and executes them in order based on he name of the file. It creates a table in your database to track which files it has already executed. If you change the db structure or want to load more data to an existing implementation, simply create new sql files with higher numbers in the name. Flyway will detect and execute them just once the next time the app starts. Flyway calls these files "migrations
 
-By default, only cities from Hampshire, Surrey and the West Midlands are loaded (for performance reasons). To load all cities, renmae the db/migrations/....txt file and delete your local copy of the three sql files for  these counties.
+e.g. file V1.sql will run before V1.1. If you later add V1.2, only this file will be executed.
 
-If you don't want to use Flyway, simply comment it out from the dependencies section in the buld.gradle (and Spring Boot will not activate it). You can then simple uncomment the following lines in [src/main/resources/application.properties] (src/main/resources/application.properties) file:
+By default, only cities from Hampshire, Surrey and the West Midlands are loaded (for performance reasons) in this app. To load all cities, renmae the db/migrations/....txt file and delete your local copy of the three sql files for these counties.
+
+If you don't want to use Flyway and use hibernate instead, simply comment it out from the dependencies section in the buld.gradle (and Spring Boot will not activate it). You can then simple uncomment the following lines in [src/main/resources/application.properties] (src/main/resources/application.properties) file:
 
 ```
 spring.jpa.hibernate.ddl-auto = create
