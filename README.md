@@ -12,7 +12,7 @@ To run outside of Eclipse just run
 ```./gradlew bootRun ```
 on your command line. You don't need to have gradle installed.
 
-##Running the app on Cloud Foundry
+## Running the app on Cloud Foundry
 To run this on Cloud Foundry, simply run the script:
 ```./first_time_push.sh ```
 
