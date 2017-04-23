@@ -6,7 +6,7 @@ This is a very simple Spring Boot project which demonstrates, that with only sma
 Note: This is a FORK of https://github.com/cf-platform-eng/spring-boot-cities! Thanks to help and tips from my team, as well as Dave Syer and Scott Frederick in this and other branches :) The SCS branch includes updates to work with Spring Cloud Services.
 
 ## Running the app locally
-You don't need to have a databse running, this app will automatically spin up H2 in memory for you, because of Spring Boot. However, if yuou have one you want to use, such as MySQL, then omment/uncomment the relevant lines in build.gradle and and amend the application.yml file with url, username etc settings for your database. 
+You don't need to have a database running, this app will automatically spin up H2 in memory for you, because of Spring Boot. However, if you have one you want to use, such as MySQL, then a) comment/uncomment the relevant lines in build.gradle to get Spring Boot to automatically load the mySQL jdbc drives and b) amend the application.yml file with url, username etc settings for your database. 
 
 To run outside of Eclipse just run 
 ```./gradlew bootRun ```
