@@ -1,5 +1,21 @@
 https://twitter.com/Sufyaan_Kazi
 
+- [spring-boot-cities-service](#spring-boot-cities-service)
+  * [Running the app locally](#running-the-app-locally)
+  * [Running the app on Cloud Foundry](#running-the-app-on-cloud-foundry)
+  * [Running the app directly on AWS](#running-the-app-directly-on-aws)
+  * [Usage!](#usage-)
+  * [Wait, I want a GUI!](#wait--i-want-a-gui-)
+  * [What about Netflix OSS and Spring Cloud Services?](#what-about-netflix-oss-and-spring-cloud-services-)
+  * [Can I get some metrics?](#can-i-get-some-metrics-)
+  * [This app is too simple](#this-app-is-too-simple)
+  * [How is data loaded?](#how-is-data-loaded-)
+  * [Achitecture](#achitecture)
+  * [Tell me more](#tell-me-more)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 # spring-boot-cities-service
 This is a very simple Spring Boot project which demonstrates, that with only small a footprint of code its possible to a create a complex webservice which exposes CRUD operations as restful endpoints. This microservice runs on a local machine or on Cloud Foundry, or AWS (or anywhere you can run a Spring Boot app). To see how to package a war rather than a "fat" jar, look in the AppD branch.
 
